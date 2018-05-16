@@ -48,7 +48,7 @@ document.getElementById('addNewNoteForm').addEventListener('submit', function (e
     .auth('liz', 'dogsarebetterthancats')
     .send({
       title: title,
-      tet: text,
+      text: text,
       tags: tags
     })
     .then(response => {
