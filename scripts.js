@@ -1,6 +1,7 @@
 import request from 'superagent'
 
 let notesList = []
+console.log(notesList)
 
 // Event listener to open note form and make new note button dissappear on click of new note button
 
@@ -20,11 +21,12 @@ function deleteNote (noteId) {
       updateAllNotes(notesList)
     })
 }
+console.log(notesList)
 
 // Function to turn note into html
 function noteToHTML (note) {
-  return
-  `<div class = "listedNote" data-note-id="${note._id}">
+  return `
+  <div class = "listedNote" data-note-id="${note._id}">
     <h2>${note.title}</h2>
     <p>${note.body}</p>
     <p>${note.tags.join(', ')}</p>
@@ -42,10 +44,9 @@ function notesToHTML (notes) {
 
 // Function to update notes
 function updateNotes (notes) {
-  // const section = document.getElementById(sectionId)
-  const listedDiv = document.getElementById('listedDiv')
-  listedDiv.innerHTML = notesToHTML(notes)
-  listedDiv.querySelectorAll('.delete').forEach(button => {
+  const notesDisplayArea = document.getElementById('notesDisplayArea')
+  notesDisplayArea.innerHTML = notesToHTML(notes)
+  notesDisplayArea.querySelectorAll('delete').forEach(button => {
     button.addEventListener('click', event => {
       const noteId = button.dataset.noteId
       deleteNote(noteId)
@@ -54,11 +55,24 @@ function updateNotes (notes) {
 }
 
 // Function to update all notes
-function updateAllNotes (notes) {
-  updateNotes('notes', notes.filter(note => note.status === 'notes'))
-}
-
+// This is all fucked up****************************************** filter only returns the members of the array for which the stuff in parentheses is true
+// function updateAllNotes (notes) {
+//   updateNotes('notes', notes.filter(note => note.status === 'notes'))
 // }
+
+function getAndUpdateNotes () {
+  request
+    .get('https://notes-api.glitch.me/api/notes')
+    .auth('liz', 'dogsarebetterthancats')
+    .then(response => {
+      notesList = response.body.books
+      // updateAllNotes(notesList)
+    })
+}
+console.log(notesList)
+getAndUpdateNotes()
+// }
+console.log(notesList)
 
 // Function to add new note, needs to be event listener on submit button
 document.getElementById('addNewNoteForm').addEventListener('submit', function (event) {
@@ -70,6 +84,7 @@ document.getElementById('addNewNoteForm').addEventListener('submit', function (e
   console.log(title)
   console.log(text)
   console.log(tags)
+  console.log(notesList)
 
   request
     .post('https://notes-api.glitch.me/api/notes')
@@ -83,8 +98,11 @@ document.getElementById('addNewNoteForm').addEventListener('submit', function (e
       document.getElementById('addNewNoteForm').reset()
       document.getElementById('addNewNoteForm').classList.add('hidden')
       document.getElementById('newNoteButton').classList.remove('hidden')
+      console.log(response.body)
+      console.log(notesList)
+      // Why is NotesList now undefined when it was fine immediately before the function?
       notesList.push(response.body)
-      // updateNotes(noteList)
+      updateNotes(notesList)
     })
     // .catch((err) => {
     //   console.error(err)
