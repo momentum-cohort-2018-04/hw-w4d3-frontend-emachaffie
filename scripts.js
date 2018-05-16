@@ -5,7 +5,7 @@ let notesList = []
 // Function to delete a note
 function deleteNote (noteId) {
   request
-    .delete(https://notes-api.glitch.me/api/notes/notes/`${noteId}`)
+    .delete("https://notes-api.glitch.me/api/notes/`${noteId}`")
     .auth('liz', 'dogsarebetterthancats')
     .then(response => {
       notesList = notesListfilter(note => note._id !== noteId)
