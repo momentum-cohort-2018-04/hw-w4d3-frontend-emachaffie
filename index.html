@@ -14,7 +14,7 @@
   </header>
   <main>
     <div>
-      <button id = "newNoteButton" class = "hidden">New Note</button>
+      <button id = "newNoteButton" class = "">New Note</button>
     </div>
     <div>
       <form id = "addNewNoteForm" class = "hidden">
@@ -30,7 +30,17 @@
               <label for="tags">Tags: </label>
               <input type="text" id="tags" name="tags">
             </div>
+            <div>
+                <button type="submit">Add Note</button>
+            </div>
+          </div>
       </form>
+      <div id = "notesDisplayArea">
+          <div>
+            <h2>noteTitle</h2>
+            <p>noteBody</p>
+            <p>noteTags</p>
+          </div>
 <!-- Needs submit button! -->
       
     </div>
@@ -40,23 +50,3 @@
 </body>
 </html>
 
-<!-- <form id="add-book-form" class="hidden">
-    <div class="row">
-      <div class="col input-field">
-        <input type="text" placeholder="Title" name="title" id="title">
-      </div>
-      <div class="col input-field">
-        <input type="text" placeholder="Authors" name="authors" id="authors">
-      </div>
-      <div class="col input-field">
-        <select name="status" id="status">
-          <option value="toread">To Read</option>
-          <option value="reading">Reading</option>
-          <option value="read">Read</option>
-        </select>  
-      </div>
-      <div class="col">
-        <button type="submit">Add Book</button>
-      </div>
-    </div>
-  </form> -->
