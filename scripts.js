@@ -16,12 +16,22 @@ function deleteNote (noteId) {
     .delete(`https://notes-api.glitch.me/api/notes/${noteId}`)
     .auth('liz', 'dogsarebetterthancats')
     .then(response => {
-      notesList = notesListfilter(note => note._id !== noteId)
+      notesList = notesList.filter(note => note._id !== noteId)
       updateAllNotes(notesList)
     })
 }
 
 // Function to turn note into html
+function noteToHTML (note) {
+  return
+  `<div data-note-id="${note._id}">
+    <h2>${note.title}</h2>
+    <p>${note.body}</p>
+    <p>${note.tags.join(', ')}</p>
+    <button type = "button" class = "edit">Edit</button>
+    <button type = "button" class = "delete">Delete</button>
+  </div>`
+}
 
 // Function to stick previous function's html into page html
 
