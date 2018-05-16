@@ -4,11 +4,59 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Note App</title>
+  <title>Take Note</title>
   <link rel="stylesheet" href="style.scss">
   <script src="scripts.js" defer></script>
 </head>
 <body>
-  <h1>Note Taker</h1>
+  <header>
+    <h1>Take Note</h1>
+  </header>
+  <main>
+    <div>
+      <button id = "newNoteButton" class = "hidden">New Note</button>
+    </div>
+    <div>
+      <form id = "addNewNoteForm" class = "hidden">
+          <div>
+              <label for="noteTitle">Note Title: </label>
+              <input type="text" id="noteTitle" name="noteTitle">
+            </div>
+            <div>
+              <label for="noteBody">Note: </label>
+              <textarea type="text" id="noteBody" name="noteBody"></textarea>
+            </div>
+            <div>
+              <label for="tags">Tags: </label>
+              <input type="text" id="tags" name="tags">
+            </div>
+      </form>
+<!-- Needs submit button! -->
+      
+    </div>
+    <div id = "noteList container">
+    </div>
+  </main>
 </body>
 </html>
+
+<!-- <form id="add-book-form" class="hidden">
+    <div class="row">
+      <div class="col input-field">
+        <input type="text" placeholder="Title" name="title" id="title">
+      </div>
+      <div class="col input-field">
+        <input type="text" placeholder="Authors" name="authors" id="authors">
+      </div>
+      <div class="col input-field">
+        <select name="status" id="status">
+          <option value="toread">To Read</option>
+          <option value="reading">Reading</option>
+          <option value="read">Read</option>
+        </select>  
+      </div>
+      <div class="col">
+        <button type="submit">Add Book</button>
+      </div>
+    </div>
+  </form> -->
