@@ -24,21 +24,39 @@ function deleteNote (noteId) {
 // Function to turn note into html
 function noteToHTML (note) {
   return
-  `<div data-note-id="${note._id}">
+  `<div class = "listedNote" data-note-id="${note._id}">
     <h2>${note.title}</h2>
     <p>${note.body}</p>
     <p>${note.tags.join(', ')}</p>
-    <button type = "button" class = "edit">Edit</button>
-    <button type = "button" class = "delete">Delete</button>
+    <button type = "button" class = "edit" data-note-id="${note._id}">Edit</button>
+    <button type = "button" class = "delete" data-note-id="${note._id}">Delete</button>
   </div>`
 }
 
 // Function to stick previous function's html into page html
+function notesToHTML (notes) {
+  return notes.map(noteToHTML).join('\n')
+}
 
 // Function to edit a note
 
+// Function to update notes
+function updateNotes (notes) {
+  // const section = document.getElementById(sectionId)
+  const listedDiv = document.getElementById('listedDiv')
+  listedDiv.innerHTML = notesToHTML(notes)
+  listedDiv.querySelectorAll('.delete').forEach(button => {
+    button.addEventListener('click', event => {
+      const noteId = button.dataset.noteId
+      deleteNote(noteId)
+    })
+  })
+}
+
 // Function to update all notes
-// function updateAllNotes {
+function updateAllNotes (notes) {
+  updateNotes('notes', notes.filter(note => note.status === 'notes'))
+}
 
 // }
 
