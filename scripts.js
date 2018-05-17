@@ -3,25 +3,16 @@ import request from 'superagent'
 let notesList = []
 console.log(notesList)
 
-// Event listener to open note form and make new note button dissappear on click of new note button
+window.addEventListener('load', function () {
+  getAndUpdateNotes()
+})
 
+// Event listener to open note form and make new note button dissappear on click of new note button
 document.getElementById('newNoteButton').addEventListener('click',
   function () {
     document.getElementById('addNewNoteForm').classList.remove('hidden')
     document.getElementById('newNoteButton').classList.add('hidden')
   })
-
-// Function to delete a note
-function deleteNote (noteId) {
-  request
-    .delete(`https://notes-api.glitch.me/api/notes/${noteId}`)
-    .auth('liz', 'dogsarebetterthancats')
-    .then(response => {
-      notesList = notesList.filter(note => note._id !== noteId)
-      updateAllNotes(notesList)
-    })
-}
-console.log(notesList)
 
 // Function to turn note into html
 function noteToHTML (note) {
@@ -37,28 +28,35 @@ function noteToHTML (note) {
 
 // Function to stick previous function's html into page html
 function notesToHTML (notes) {
-  return notes.map(noteToHTML).join('\n')
+  console.log(notes)
+  return notes.map(x => noteToHTML(x)).join('\n')
 }
 
 // Function to edit a note
 
 // Function to update notes
-function updateNotes (notes) {
+function updateNotes (notesList) {
   const notesDisplayArea = document.getElementById('notesDisplayArea')
-  notesDisplayArea.innerHTML = notesToHTML(notes)
+  notesDisplayArea.innerHTML = notesToHTML(notesList)
   notesDisplayArea.querySelectorAll('delete').forEach(button => {
     button.addEventListener('click', event => {
       const noteId = button.dataset.noteId
+      console.log(button.dataset.noteId)
       deleteNote(noteId)
     })
   })
 }
 
-// Function to update all notes
-// This is all fucked up****************************************** filter only returns the members of the array for which the stuff in parentheses is true, what do you actually need to filter after the other functions?
-// function updateAllNotes (notes) {
-//   updateNotes('notes', notes.filter(note => note.status === 'notes'))
-// }
+// Function to delete a note
+function deleteNote (noteId) {
+  request
+    .delete(`https://notes-api.glitch.me/api/notes/${noteId}`)
+    .auth('liz', 'dogsarebetterthancats')
+    .then(response => {
+      notesList = notesList.filter(note => note._id !== noteId)
+      console.log(notesList)
+    })
+}
 
 function getAndUpdateNotes () {
   request
@@ -66,13 +64,10 @@ function getAndUpdateNotes () {
     .auth('liz', 'dogsarebetterthancats')
     .then(response => {
       notesList = response.body.notes
-      // updateAllNotes(notesList)
+      updateNotes(notesList)
+      console.log('getandupdatenotes', notesList)
     })
 }
-console.log(notesList)
-getAndUpdateNotes()
-// }
-console.log(notesList)
 
 // Function to add new note, needs to be event listener on submit button
 document.getElementById('addNewNoteForm').addEventListener('submit', function (event) {
@@ -103,7 +98,7 @@ document.getElementById('addNewNoteForm').addEventListener('submit', function (e
       notesList.push(response.body)
       updateNotes(notesList)
     })
-    // .catch((err) => {
-    //   console.error(err)
-    // })
+    .catch((err) => {
+      console.error(err)
+    })
 })

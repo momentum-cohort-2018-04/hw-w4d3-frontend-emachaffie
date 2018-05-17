@@ -1,3 +1,38 @@
+* {
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+h1 {
+  margin: 20px;
+}
+
+#newNoteButton {
+  margin-left: 20px;
+}
+
 .hidden {
   display: none;
 }
+
+
+
+button {
+  background-color: lightslategrey;
+  color: white;
+  padding: 5px;
+
+}
+
+.listedNote {
+  margin-left: 50px;
+  margin-top: 50px;
+
+  p {
+    color: black;
+  }
+
+  h2 {
+    color: lightseagreen;
+  }
+  }
