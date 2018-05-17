@@ -55,7 +55,7 @@ function updateNotes (notes) {
 }
 
 // Function to update all notes
-// This is all fucked up****************************************** filter only returns the members of the array for which the stuff in parentheses is true
+// This is all fucked up****************************************** filter only returns the members of the array for which the stuff in parentheses is true, what do you actually need to filter after the other functions?
 // function updateAllNotes (notes) {
 //   updateNotes('notes', notes.filter(note => note.status === 'notes'))
 // }
