@@ -65,7 +65,7 @@ function getAndUpdateNotes () {
     .get('https://notes-api.glitch.me/api/notes')
     .auth('liz', 'dogsarebetterthancats')
     .then(response => {
-      notesList = response.body.books
+      notesList = response.body.notes
       // updateAllNotes(notesList)
     })
 }
@@ -100,7 +100,6 @@ document.getElementById('addNewNoteForm').addEventListener('submit', function (e
       document.getElementById('newNoteButton').classList.remove('hidden')
       console.log(response.body)
       console.log(notesList)
-      // Why is NotesList now undefined when it was fine immediately before the function?
       notesList.push(response.body)
       updateNotes(notesList)
     })
