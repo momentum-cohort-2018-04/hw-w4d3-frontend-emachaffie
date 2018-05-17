@@ -28,7 +28,7 @@ function noteToHTML (note) {
   return `
   <div class = "listedNote" data-note-id="${note._id}">
     <h2>${note.title}</h2>
-    <p>${note.body}</p>
+    <p>${note.text}</p>
     <p>${note.tags.join(', ')}</p>
     <button type = "button" class = "edit" data-note-id="${note._id}">Edit</button>
     <button type = "button" class = "delete" data-note-id="${note._id}">Delete</button>
