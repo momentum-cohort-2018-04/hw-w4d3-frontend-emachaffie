@@ -33,6 +33,7 @@ function notesToHTML (notes) {
 }
 
 // Function to edit a note
+// Edit button set on click to open form for editing, then do a put request with appropriate id
 
 // Function to update notes
 function updateNotes (notesList) {
@@ -57,6 +58,8 @@ function deleteNote (noteId) {
       console.log(notesList)
     })
 }
+
+deleteNote('20G6qbWrI2JSzl3W')
 
 function getAndUpdateNotes () {
   request
